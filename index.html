@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Externals</h3><ul><li><a href="external-HTMLImports.html">HTMLImports</a></li></ul><h3>Namespaces</h3><ul><li><a href="VisualFixtureTest.html">VisualFixtureTest</a><ul class='methods'><li data-type='method'><a href="VisualFixtureTest.html#.createSelector">createSelector</a></li><li data-type='method'><a href="VisualFixtureTest.html#.executeFixtureCallback">executeFixtureCallback</a></li><li data-type='method'><a href="VisualFixtureTest.html#.extractImport">extractImport</a></li><li data-type='method'><a href="VisualFixtureTest.html#.extractImportFilename">extractImportFilename</a></li><li data-type='method'><a href="VisualFixtureTest.html#.getImportByName">getImportByName</a></li><li data-type='method'><a href="VisualFixtureTest.html#.testFixture">testFixture</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>Visual Fixture Test</h1><p>This micro-library that gives opportunity to visually test fixtures in your project that have been used for unit-testing your components.</p>
+<h1>Setup</h1><h3>Installation</h3><p>To install it execute the following command in Terminal for your project directory, if this library is not included into your <code>package.json</code> yet</p>
+<pre class="prettyprint source"><code>npm install --save-dev confirmitasa/r-visual-fixture-test</code></pre><h3>Test page</h3><p>Grab this code to create your test page. Make sure you provide a correct path to the <code>visual-fixture-test.js</code> and <code>HTMLImports.js</code> (installed with this bundle) in your file:</p>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html lang=&quot;en&quot;>
+&lt;head>
+  &lt;meta charset=&quot;UTF-8&quot;>
+  &lt;title>Visual test&lt;/title>
+  &lt;!-- Make sure the filepath is correct -->
+  &lt;script src=&quot;../../node_modules/webcomponents.js/src/HTMLImports/HTMLImports.js&quot;>&lt;/script>
+  &lt;!-- This script loads your module code that you want to visually test on your fixtures-->
+  &lt;script src=&quot;../../dist/r-sort-table.bundle.js&quot;>&lt;/script>
+
+  &lt;!-- Make sure the filepath is correct -->
+  &lt;script src=&quot;../../node_modules/r-visual-fixture-test/src/visual-fixture-test.js&quot;>&lt;/script>
+
+  &lt;script>
+    // use the visual-fixture-test's `testFixture` to create your module's execution context for a fixture
+    testFixture('table-nested-headers',function(){
+      var tableTest = new Reportal.SortTable({
+        source: document.querySelector('table'),
+        data: [['foo','bar']]
+      });
+    });
+  &lt;/script>
+
+  &lt;!-- Import necessary fixtures, they'll be automatically added to a dropdown on that page for selection. The first fixture in this import list will load on pageload. Make sure the path is correct-->
+  &lt;link rel=&quot;import&quot; href=&quot;../__tests__/fixtures/table-nested-headers.html&quot;>
+
+&lt;/head>
+&lt;!-- Body tag can be left empty, there's nothing you'd need to load here -->
+&lt;body>&lt;/body>
+&lt;/html></code></pre><h1><code>testFixture()</code></h1><p><code>testFixture()</code> is a function that lets you load contexts for your module execution on a per-fixture or a global basis. This is the only function you need to use to setup the process.</p>
+<h3>Named (fixture-specific) context</h3><p><code>testFixture('fixture-name', function(){ /* fixture modification is here */ })</code>: You may pass up to two attributes to the function:</p>
+<ul>
+<li><code>name</code> - A dash(<code>-</code>)-concatenated name of the fixture that corresponds to the fixture filename without <code>.html</code> extension.  If fixture is along path <code>../__tests__/fixtures/my-awesome-fixture.html</code>, the name would be <code>my-awesome-fixture</code>. Providing a name makes the fixture execution code be fixture-specific. Pass this argument only if you need a fixture-specific execution configuration. If this option is omitted, it's assumed that the callback function is to be executed for all fixtures imported into the document.</li>
+<li><code>callback</code> - a callback function that will be executed every time the fixture is loaded</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>
+ // functions will be executed per named fixture
+
+ testFixture('my-awesome-fixture', function(){
+    //code executed only for `my-awesome-fixture.html`
+ });
+
+ testFixture('my-super-awesome-fixture', function(){
+    //code executed only for `my-super-awesome-fixture.html`
+ });</code></pre><h3>Nameless (global) context</h3><p><code>testFixture(function(){ ... })</code> - if you pass only a function callback that does something to the fixture, without providing a name, it will be a default callback for all fixtures (except for those that have named callbacks)</p>
+<pre class="prettyprint source lang-javascript"><code>
+ // will executed on all fixtures in the document every time the fixture is loaded.
+ // It's assumed this callback will be executed for all fixtures that don't have a fixture-specific code. 
+ // There can be only one default (nameless) fixture callback on a page
+ testFixture(function(){
+    // fixture processing code
+ });</code></pre><h3>Commands (configured in package.json)</h3><ul>
+<li><code>npm install</code> installs all dependencies of the project</li>
+<li><code>npm run docs</code> generates documentation for your project <code>.js</code> files that use JSDoc3 comments and puls them into <code>docs</code> folder</li>
+<li><code>npm run docs-commit</code>  publishes documentation to <code>http://ConfirmitASA.github.io/[RepoName]/</code> where <code>[RepoName]</code> is name of your repository as well as name specified in <code>package.json -&gt; name</code> AND <code>[version]</code> is the version in your <code>package.json</code>. 
+Please make sure you have the <code>npm run docs-commit</code> command configured properly with the correct name of repo to be used there.</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Tue Sep 20 2016 12:04:33 GMT+0100 (GMT Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
