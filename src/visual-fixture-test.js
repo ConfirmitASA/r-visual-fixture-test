@@ -34,6 +34,7 @@ function createSelector(imports){
   selector.addEventListener("change",function(e){
     extractImport(getImportByName(e.target.value));
   });
+  selector.setAttribute('style','padding: 8px;');
   // add imports as options to select
   imports.forEach(function(imp){
     var name = extractImportFilename(imp.href);
@@ -76,6 +77,7 @@ function getImportByName(id){
  * */
 function extractImport(imp){
   var container = document.querySelector('#fixtureContainer');
+  container.setAttribute('style','margin-top:8px;border-top: 1px solid #f2f2f2; padding-top:8px');
   if(!container){
     container = document.createElement('div');
     container.id='fixtureContainer';

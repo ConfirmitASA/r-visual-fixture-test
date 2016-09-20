@@ -91,6 +91,19 @@ Grab this code to create your test page. Make sure you provide a correct path to
 
  ```
 
+## Browser Support
+
+This lobrary is intended to work in the latest versions of evergreen browsers. See below
+for our complete browser support matrix:
+
+| Polyfill   | IE10 | IE11+ | Chrome* | Firefox* | Safari 7+* | Chrome Android* | Mobile Safari* |
+| ---------- |:----:|:-----:|:-------:|:--------:|:----------:|:---------------:|:--------------:|
+| HTML Imports | ~ | ✓ | ✓ | ✓ | ✓| ✓| ✓ |
+
+*Indicates the current version of the browser
+
+~Indicates support may be flaky.
+
 
 ### Commands (configured in package.json)
 
