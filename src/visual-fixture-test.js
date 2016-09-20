@@ -77,11 +77,11 @@ function getImportByName(id){
  * */
 function extractImport(imp){
   var container = document.querySelector('#fixtureContainer');
-  container.setAttribute('style','margin-top:8px;border-top: 1px solid #f2f2f2; padding-top:8px');
   if(!container){
     container = document.createElement('div');
     container.id='fixtureContainer';
     document.querySelector('body').appendChild(container);
+    container.setAttribute('style','margin-top:8px;border-top: 1px solid #f2f2f2; padding-top:8px');
   }
   container.innerHTML = imp.import.querySelector('body').innerHTML;
   document.querySelector('title').textContent = 'Visual test for "'+ imp.id.replace(/-/g,' ')+'"'; // update page title with the fixture name
