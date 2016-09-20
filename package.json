@@ -17,7 +17,9 @@
   "license": "",
   "devDependencies": {
     "jsdoc": "^3.4.0",
-    "webcomponents.js": "github:webcomponents/webcomponentsjs",
     "docdash": "^0.4.0"
+  },
+  "dependencies":{
+    "webcomponents.js": "github:webcomponents/webcomponentsjs"
   }
 }

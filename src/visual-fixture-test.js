@@ -152,3 +152,5 @@ function executeFixtureCallback(name){
     throw new TypeError('executionFixtureCallback needs a fixture name')
   }
 }
+
+//TODO: add possibility to display fixture code in a text field with option to live change it and apply to the fixture (fixture would have to reload)
