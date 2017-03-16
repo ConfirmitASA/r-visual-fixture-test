@@ -20,6 +20,6 @@
     "docdash": "^0.4.0"
   },
   "dependencies":{
-    "webcomponents.js": "github:webcomponents/webcomponentsjs"
+    "@webcomponents/html-imports": "github:webcomponents/html-imports"
   }
 }
